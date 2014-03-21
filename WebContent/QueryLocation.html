@@ -1,0 +1,40 @@
+<html>
+<head>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		
+		$.ajax({
+			url : "tweetvenue.json",
+			type : "POST",
+			data : {	
+			},			
+			dataType : "json",
+			success : handleData
+		});
+		$("#loading").html("Querying for Data...");
+	});
+	function handleData(data) {
+		$("#loading").html("");
+		var venueData = JSON.stringify(data.venues);
+		$('#venues').html("<p>Venue Data:<br/>"+venueData+"</p>");
+		var tweetData = JSON.stringify(data.tweetsinfo);
+	    $('#tweets').html("<p>Tweet Data:<br/>"+tweetData+"</p>");		
+	}
+	/* function handleData(data) {
+		var json= JSON.stringify(data);
+		//var obj = JSON.parse(data);
+		var obj = JSON && JSON.parse(json) || $.parseJSON(json);
+		alert(obj.count);
+		alert("complete");
+	} */
+</script>
+</head>
+<body>
+	<div id="loading"></div>
+	<div id="tweets"></div>
+	<div id="venues"></div>
+	<form>
+	</form>
+</body>
+</html>
